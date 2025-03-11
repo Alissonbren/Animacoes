@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -11,6 +12,8 @@ public class Player : MonoBehaviour
 
     public bool andando = false;
 
+    public bool morte = false;
+    
   private Rigidbody2D _rigidbody2D;
   private SpriteRenderer  _spriteRenderer;
   private Animator _animator;
@@ -44,7 +47,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         andando = false;
-        
+      
+        if(morte == false)
+        {
+            
       if(Input.GetKey(KeyCode.LeftArrow))
       {
         gameObject.transform.position += new Vector3(-velocidade*Time.deltaTime,0,0);
@@ -78,9 +84,12 @@ public class Player : MonoBehaviour
 
             Debug.Log("Jump");
         }
+        
+        }
 
         _animator.SetBool("Andando",andando);
-        
+        _animator.SetBool("Morte",morte);
+        _animator.SetBool("NoChao",noChao);
      
     }
 }
